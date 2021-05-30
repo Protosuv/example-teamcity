@@ -43,6 +43,10 @@ object Build : BuildType({
 
     steps {
         maven {
+
+            conditions {
+                equals("vcsroot.branch", "master")
+            }
             goals = "clean package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
