@@ -29,7 +29,6 @@ version = "2020.2"
 project {
 
     buildType(Build)
-    buildType(BuildV2)
 }
 
 object Build : BuildType({
@@ -55,31 +54,6 @@ object Build : BuildType({
     triggers {
         vcs {
             branchFilter = "+:master"
-        }
-    }
-})
-
-object BuildV2 : BuildType({
-    name = "Build_v2"
-
-    vcs {
-        root(DslContext.settingsRoot)
-
-        branchFilter = """
-            +:*
-            -:master
-        """.trimIndent()
-    }
-
-    steps {
-        maven {
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
-        }
-    }
-
-    triggers {
-        vcs {
         }
     }
 })
