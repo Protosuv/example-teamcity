@@ -50,6 +50,7 @@ object Build : BuildType({
         }
         maven {
             name = "Test package"
+            executionMode = BuildStep.ExecutionMode.ALWAYS
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
