@@ -34,6 +34,9 @@ project {
 object Build : BuildType({
     name = "Build"
 
+    artifactRules = "target/*.jar"
+    publishArtifacts = PublishMode.SUCCESSFUL
+
     vcs {
         root(DslContext.settingsRoot)
     }
@@ -51,6 +54,10 @@ object Build : BuildType({
         maven {
             name = "Test package"
             executionMode = BuildStep.ExecutionMode.ALWAYS
+
+            conditions {
+                doesNotContain("teamcity.build.branch", "master")
+            }
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
@@ -58,7 +65,6 @@ object Build : BuildType({
 
     triggers {
         vcs {
-            branchFilter = "+:master"
         }
     }
 })
