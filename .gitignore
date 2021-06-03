@@ -1,3 +1,4 @@
 target/classes/plaindoll/HelloPlayer.class
 target/classes/plaindoll/Welcomer.class
 target/test-classes/plaindoll/WelcomerTest.class
+.idea/
